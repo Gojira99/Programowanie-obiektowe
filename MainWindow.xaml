@@ -1,0 +1,132 @@
+﻿<Window x:Class="Restauracja.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restauracja"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid x:Name="ListPracownicy" Margin="-4,0,3.6,1" RenderTransformOrigin="0.488,0.521">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="284*"/>
+            <ColumnDefinition Width="113*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="TBLiczbaGodzin" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="10,164,0,0" Visibility="Collapsed"/>
+        <TextBox x:Name="TBStawka" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="10,105,0,0" Visibility="Collapsed"/>
+        <Label x:Name="lb1" Content="&#xD;&#xA;Stanowisko" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="120" Height="42" Visibility="Collapsed"/>
+        <Label x:Name="lb3" Content="Liczba godzin" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,133,0,0" Width="120" Height="26" Visibility="Collapsed"/>
+        <Label x:Name="lb2" Content="Stawka" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,79,0,0" Width="120" Height="26" Visibility="Collapsed"/>
+        <Button x:Name="BTDodajPracownika" Content="Dodaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="10,203,0,0" Click="BTDodajPracownika_Click" Height="19" Visibility="Collapsed"/>
+        <ListView x:Name="LSTPracownik" HorizontalAlignment="Left" Height="190" Margin="202,52,0,0" VerticalAlignment="Top" Width="310" Visibility="Hidden">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Stanowisko" DisplayMemberBinding="{Binding Stanowisko}"/>
+                    <GridViewColumn Header="Placa" DisplayMemberBinding="{Binding Placa}"/>
+                    <GridViewColumn Header="Liczba godzin Przepracowana" DisplayMemberBinding="{Binding LiczbaGodzinPrzepracowana}"/>
+                    <GridViewColumn Header="Wyplata" DisplayMemberBinding="{Binding Wyplata}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+        <ComboBox x:Name="CBStanowisko" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Width="120" Visibility="Collapsed">
+            <ComboBoxItem x:Name="CBIKucharz" Content="Kucharz" HorizontalAlignment="Left" Width="118.4"/>
+            <ComboBoxItem x:Name="CBIKelner" Content="Kelner" HorizontalAlignment="Left" Width="118.4"/>
+            <ComboBoxItem x:Name="CBIZmywak" Content="Zmywak" HorizontalAlignment="Left" Width="118.4"/>
+            <ComboBoxItem x:Name="CBIPomocKuchenna" Content="PomocKuchenna" HorizontalAlignment="Left" Width="118.4"/>
+        </ComboBox>
+        <StackPanel x:Name="PanelPrzyciski" Grid.Column="1" HorizontalAlignment="Left" Height="170" Margin="43,17,0,0" VerticalAlignment="Top" Width="147">
+            <Label Content="Pracownicy" Margin="0,0,0.2,0"/>
+            <Button x:Name="BTPokarzPracownikow" Content="Pokarz" Margin="0,0,0.2,0" Click="BTPokarzPracownikow_Click"/>
+            <Button x:Name="BTSchowajPracownikow" Content="Schowaj" Margin="0,0,0.2,0" Click="BTSchowajPracownikow_Click"/>
+            <Label Content="Menu" Margin="0,0,0.2,0"/>
+            <Button x:Name="BTNMEnuPokarz" Content="Pokarz" Click="BTNMEnuPokarz_Click"/>
+            <Button x:Name="BTNMEnuSchowaj" Content="Schowaj" Click="BTNMEnuSchowaj_Click"/>
+            <Button x:Name="BTNReset" Content="Resetuj" Click="BTNReset_Click"/>
+        </StackPanel>
+        <StackPanel x:Name="SPMEnuWybor" Height="402" Margin="30,17,397,0" VerticalAlignment="Top">
+            <Label Content="Dania Wegetariańskie"/>
+            <ComboBox x:Name="CzyWege" Margin="0,0,-0.2,0">
+                <ComboBoxItem Name="ITWegeTak" Content="Tak" HorizontalAlignment="Left" Width="118.4"/>
+                <ComboBoxItem Name="ITWegeNie" Content="Nie" HorizontalAlignment="Left" Width="118.4"/>
+
+            </ComboBox>
+            <Label x:Name="LBDaniaGlowne" Content="Dania Główne" Margin="0,0,-0.4,0"/>
+            <ComboBox x:Name="CBDaniaGlowne" Margin="0,0,-0.4,0" SelectionChanged="CBDaniaGlowne_SelectionChanged">
+
+                <ComboBoxItem Name ="IZestaw1" Content="Zestaw1" HorizontalAlignment="Left" Width="139.2"/>
+                <ComboBoxItem Name ="IZestaw2" Content="Zetaw2" HorizontalAlignment="Left" Width="139.2"/>
+                <ComboBoxItem Name ="IZestaw3" Content="Zestaw3" HorizontalAlignment="Left" Width="139.2"/>
+                <ComboBoxItem Name = "IZestaw4" Content="Zestaw4" HorizontalAlignment="Left" Width="139.2"/>
+            </ComboBox>
+            <Label x:Name="LBPrzystawki" Content="Przystawki" Margin="0,0,9.6,0"/>
+            <ComboBox x:Name="CBPrzystawki">
+                <ComboBoxItem Name="IPCieple" Content="Ciepłe" HorizontalAlignment="Left" Width="139.2"/>
+                <ComboBoxItem Name="IPZimne" Content="Zimne" HorizontalAlignment="Left" Width="139.2"/>
+                <ComboBoxItem Name="IPObie" Content="Ciepłe i Zimne" HorizontalAlignment="Left" Width="139.2"/>
+            </ComboBox>
+            <Label x:Name="LBNapoje" Content="Napoje" Margin="0,0,-0.2,0"/>
+            <ComboBox x:Name="CBNapoje" Margin="0,0,-0.2,0">
+                <ComboBoxItem x:Name="INTAk" Content="Tak" HorizontalAlignment="Left" Width="139.2"/>
+                <ComboBoxItem x:Name="INNie" Content="Nie" HorizontalAlignment="Left" Width="139.2"/>
+            </ComboBox>
+            <Label x:Name="LBalkochole" Content="Alkochole" Margin="0,0,-0.2,0"/>
+            <ComboBox x:Name="CBAlkochole" Margin="0,0,-0.2,0">
+                <ComboBoxItem x:Name="IABrak" Content="Brak" HorizontalAlignment="Left" Width="139.2"/>
+                <ComboBoxItem x:Name="IANaStole" Content="Alkocho na Stole" HorizontalAlignment="Left" Width="139.2"/>
+                <ComboBoxItem x:Name="IABar" Content="Bar" HorizontalAlignment="Left" Width="139.2"/>
+            </ComboBox>
+            <Label Content="Stolik Kawowy"/>
+            <ComboBox x:Name="CBSTolikKawowoy">
+                <ComboBoxItem Name="ISKCiasto" Content="Ciasto" HorizontalAlignment="Left" Width="139.2"/>
+                <ComboBoxItem Name="ISKWarwnik" Content="Warwnik" HorizontalAlignment="Left" Width="139.2"/>
+                <ComboBoxItem Name="ISKEkspress" Content="Express" HorizontalAlignment="Left" Width="139.2"/>
+                <ComboBoxItem x:Name="ISKBrak" Content="Brak" HorizontalAlignment="Left" Width="139.2"/>
+            </ComboBox>
+            <Label Content="LiczbaGosci" Margin="0,0,-0.2,0"/>
+            <TextBox x:Name="TBliczbaGosci" Height="23" TextWrapping="Wrap" Margin="0,0,-0.2,0" TextChanged="TBliczbaGosci_TextChanged"/>
+            <Button x:Name="BTNNApojeICiasta" Content="Dodaj" Click="BTNNApojeICiasta_Click"/>
+        </StackPanel>
+        <StackPanel x:Name="SPMenuDG" HorizontalAlignment="Left" Height="377" Margin="202,32,0,0" VerticalAlignment="Top" Width="291">
+            <ListView Height="100" x:Name="LSTMenu" Margin="0,0,-0.8,0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="DaniaGlowne" DisplayMemberBinding="{Binding Nazwa}" />
+                        <GridViewColumn Header="Dania Wegetraianskie" DisplayMemberBinding="{Binding CzyWege}"/>
+                        <GridViewColumn Header="Przystawki" DisplayMemberBinding="{Binding Rodzaj}"/>
+                        <GridViewColumn Header="Cena" DisplayMemberBinding="{Binding Cena}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <ListView x:Name="LstNapoje" Height="100">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Napoje" DisplayMemberBinding="{Binding Napoj}"/>
+                        <GridViewColumn Header="Alkochol" DisplayMemberBinding="{Binding Brak }"/>
+                        <GridViewColumn Header="Alkochol na stole" DisplayMemberBinding="{Binding AlkocholNaStole  }"/>
+                        <GridViewColumn Header="Bar" DisplayMemberBinding="{Binding Bar  }"/>
+                        <GridViewColumn Header="Cena" DisplayMemberBinding="{Binding Cena }"/>
+
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <ListView x:Name="LSTStolikKawowy" Height="100">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn  Header="Brak" DisplayMemberBinding="{Binding Brak}"/>
+                        <GridViewColumn  Header="Express" DisplayMemberBinding="{Binding Express}"/>
+                        <GridViewColumn  Header="Warwnik" DisplayMemberBinding="{Binding Warwnik}"/>
+                        <GridViewColumn  Header="Ciasto" DisplayMemberBinding="{Binding Ciasta}"/>
+                        <GridViewColumn Header="Cena" DisplayMemberBinding="{Binding Cena }"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Label Content="Kwota do zapłaty" Margin="0,0,0.2,0"/>
+            <TextBox x:Name="TBKwotaDoZaplaty" Height="23" TextWrapping="Wrap" IsReadOnly="True" Margin="0,0,-0.8,0"/>
+
+        </StackPanel>
+
+
+    </Grid>
+</Window>
