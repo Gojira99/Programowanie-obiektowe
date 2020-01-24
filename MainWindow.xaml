@@ -44,7 +44,7 @@
             <Button x:Name="BTNMEnuSchowaj" Content="Schowaj" Click="BTNMEnuSchowaj_Click"/>
             <Button x:Name="BTNReset" Content="Resetuj" Click="BTNReset_Click"/>
         </StackPanel>
-        <StackPanel x:Name="SPMEnuWybor" Height="402" Margin="30,17,397,0" VerticalAlignment="Top">
+        <StackPanel x:Name="SPMEnuWybor" Height="402" Margin="30,17,397,0" VerticalAlignment="Top" Visibility="Hidden">
             <Label Content="Dania Wegetariańskie"/>
             <ComboBox x:Name="CzyWege" Margin="0,0,-0.2,0">
                 <ComboBoxItem Name="ITWegeTak" Content="Tak" HorizontalAlignment="Left" Width="118.4"/>
@@ -87,7 +87,7 @@
             <TextBox x:Name="TBliczbaGosci" Height="23" TextWrapping="Wrap" Margin="0,0,-0.2,0" TextChanged="TBliczbaGosci_TextChanged"/>
             <Button x:Name="BTNNApojeICiasta" Content="Dodaj" Click="BTNNApojeICiasta_Click"/>
         </StackPanel>
-        <StackPanel x:Name="SPMenuDG" HorizontalAlignment="Left" Height="377" Margin="202,32,0,0" VerticalAlignment="Top" Width="291">
+        <StackPanel x:Name="SPMenuDG" HorizontalAlignment="Left" Height="377" Margin="202,32,0,0" VerticalAlignment="Top" Width="329" Visibility="Hidden">
             <ListView Height="100" x:Name="LSTMenu" Margin="0,0,-0.8,0">
                 <ListView.View>
                     <GridView>
@@ -122,8 +122,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Label Content="Kwota do zapłaty" Margin="0,0,0.2,0"/>
-            <TextBox x:Name="TBKwotaDoZaplaty" Height="23" TextWrapping="Wrap" IsReadOnly="True" Margin="0,0,-0.8,0"/>
 
         </StackPanel>
 

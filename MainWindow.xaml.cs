@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -13,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.Windows.Forms;
 
 
 namespace Restauracja
@@ -36,8 +36,10 @@ namespace Restauracja
             LSTMenu.ItemsSource = ZamowDania;
             LstNapoje.ItemsSource = Napoj;
             LSTStolikKawowy.ItemsSource = Stolik;
+            Napoje n1 = new Napoje();
+            n1.Cena = 0;
             DataContext = this;
-            
+
 
 
 
@@ -49,50 +51,45 @@ namespace Restauracja
             public double Placa { get; set; }
             public double LiczbaGodzinPrzepracowana { get; set; }
             public double Wyplata { get; set; }
- 
+
 
         }
 
 
-       public abstract class Zamowienie
+        public abstract class Zamowienie
         {
             public string Nazwa { get; set; }
             public int Cena { get; set; }
 
-            
+
         }
 
         public abstract class DaniaGlowne : Zamowienie
         {
             //Mozliwosc dodania Jedzenia dla wegetarian
             public string CzyWege { get; set; }
-            
-            
+
+
         }
         public abstract class Przystawka : DaniaGlowne
         {
             public string Rodzaj { get; set; }
-            
-        }
-        public class ZamowDanie: Przystawka
-        {
-            public int Oblicz(int liczbaGosci)
-            {
-                return Cena * liczbaGosci;
-            }
 
+        }
+        public class ZamowDanie : Przystawka
+        {
         }
         public class Napoje
         {
-            public int Cena{ get; set; }
+            public int Cena { get; set; }
             public int LiczbaStolow { get; set; }
             public string Napoj { get; set; }
             public string Bar { get; set; }
             public string Brak { get; set; }
             public string AlkocholNaStole { get; set; }
-            
 
-   
+
+
 
         }
         public class StolikKawowy
@@ -102,6 +99,7 @@ namespace Restauracja
             public string Ciasta { get; set; }
             public int Cena { get; set; }
             public string Brak { get; set; }
+
         }
 
 
@@ -165,22 +163,22 @@ namespace Restauracja
             }
             if (CBNapoje.SelectedItem == INNie && CBAlkochole.SelectedItem == IABar)
             {
-                Napoj.Add(new Napoje() { Bar = CBAlkochole.Text, Cena = 450 +(20* Convert.ToInt32(TBliczbaGosci.Text))});
+                Napoj.Add(new Napoje() { Bar = CBAlkochole.Text, Cena = 450 + (20 * Convert.ToInt32(TBliczbaGosci.Text)) });
             }
             if (CBNapoje.SelectedItem == INNie && CBAlkochole.SelectedItem == IANaStole)
             {
-                Napoj.Add(new Napoje() { AlkocholNaStole = CBAlkochole.Text, Cena = 25 * Convert.ToInt32(TBliczbaGosci.Text)});
+                Napoj.Add(new Napoje() { AlkocholNaStole = CBAlkochole.Text, Cena = 25 * Convert.ToInt32(TBliczbaGosci.Text) });
             }
             if (CBNapoje.SelectedItem == INTAk && CBAlkochole.SelectedItem == IABar)
                 Napoj.Add(new Napoje() { Napoj = CBNapoje.Text, Bar = CBAlkochole.Text, Cena = 6 * Convert.ToInt32(TBliczbaGosci.Text) + 450 + (20 * Convert.ToInt32(TBliczbaGosci.Text)) });
             if (CBNapoje.SelectedItem == INTAk && CBAlkochole.SelectedItem == IANaStole)
                 Napoj.Add(new Napoje() { Napoj = CBNapoje.Text, AlkocholNaStole = CBAlkochole.Text, Cena = 6 * Convert.ToInt32(TBliczbaGosci.Text) + (25 * Convert.ToInt32(TBliczbaGosci.Text)) });
             if (CBNapoje.SelectedItem == INTAk && CBAlkochole.SelectedItem == IABrak)
-                Napoj.Add(new Napoje() { Napoj = CBNapoje.Text, Brak = CBAlkochole.Text, Cena = 6 * Convert.ToInt32(TBliczbaGosci.Text)});
+                Napoj.Add(new Napoje() { Napoj = CBNapoje.Text, Brak = CBAlkochole.Text, Cena = 6 * Convert.ToInt32(TBliczbaGosci.Text) });
 
             //Stolik Kawowy
             if (CBSTolikKawowoy.SelectedItem == ISKCiasto)
-                Stolik.Add(new StolikKawowy() { Ciasta = CBSTolikKawowoy.Text, Cena = 100});
+                Stolik.Add(new StolikKawowy() { Ciasta = CBSTolikKawowoy.Text, Cena = 100 });
             if (CBSTolikKawowoy.SelectedItem == ISKEkspress)
                 Stolik.Add(new StolikKawowy() { Express = CBSTolikKawowoy.Text, Cena = 300 });
             if (CBSTolikKawowoy.SelectedItem == ISKWarwnik)
@@ -189,14 +187,12 @@ namespace Restauracja
                 Stolik.Add(new StolikKawowy() { Brak = CBSTolikKawowoy.Text, Cena = 0 });
 
 
-
-
         }
 
 
-        private void CBDaniaGlowne_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CBDaniaGlowne_SelectionChanged(object sender, EventArgs e)
         {
-    
+
         }
 
         private void BTPokarzPracownikow_Click(object sender, RoutedEventArgs e)
@@ -244,6 +240,8 @@ namespace Restauracja
         {
             SPMenuDG.Visibility = Visibility.Hidden;
             SPMEnuWybor.Visibility = Visibility.Hidden;
+            SPMenuDG.Visibility = Visibility.Hidden;
+            SPMEnuWybor.Visibility = Visibility.Hidden;
         }
 
         private void GridViewColumn_SourceUpdated(object sender, DataTransferEventArgs e)
@@ -261,7 +259,7 @@ namespace Restauracja
             CBSTolikKawowoy.Text = string.Empty;
         }
 
-        private void TBliczbaGosci_TextChanged(object sender, TextChangedEventArgs e)
+        private void TBliczbaGosci_TextChanged(object sender, EventArgs e)
         {
 
         }
